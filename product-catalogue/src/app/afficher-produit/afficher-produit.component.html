@@ -1,0 +1,43 @@
+<div class="container mt-4">
+  <!-- Page Title -->
+  <h3 class="text-center mb-4">Liste des Produits</h3>
+
+  <!-- Dropdown for Category Filtering -->
+  <div class="mb-3">
+    <label for="categorie" class="form-label">Filtrer par catégorie :</label>
+    <select
+      id="categorie"
+      [(ngModel)]="categorieId"
+      (change)="getProduits()"
+      class="form-select"
+    >
+      <option [value]="null">Toutes les catégories</option>
+      <option *ngFor="let categorie of categories" [value]="categorie.id">
+        {{ categorie.name }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Product Table -->
+  <table class="table table-hover table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>Référence</th>
+        <th>Description</th>
+        <th>Prix Unitaire</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let produit of produits">
+        <td>{{ produit.reference }}</td>
+        <td>{{ produit.description }}</td>
+        <td>{{ produit.priceUnit | currency:'EUR' }}</td>
+      </tr>
+      <tr *ngIf="produits.length === 0">
+        <td colspan="3" class="text-center text-danger fw-bold">
+          Aucun produit trouvé
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
