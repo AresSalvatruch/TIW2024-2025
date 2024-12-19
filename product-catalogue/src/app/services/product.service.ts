@@ -17,7 +17,6 @@ export class ProductService {
   }
 
   // Fetch products by category
-  // Fetch products by category
   getProduitsParCategorie(categoryId: number): Observable<any> {
     console.log(`Fetching products for category ID: ${categoryId}`);
     return this.http.get(`${this.baseUrl}/category/${categoryId}`);
@@ -26,5 +25,11 @@ export class ProductService {
   // Fetch all categories
   getAllCategories(): Observable<any> {
     return this.http.get(`${this.categoryUrl}/all`);
+  }
+
+  // Add a product with category ID
+  ajouterProduit(produit: any, categorieId: number): Observable<any> {
+    // Ensure that you send the produit object and the categorieId as parameters in the request body
+    return this.http.post(`${this.baseUrl}/add/${categorieId}`, produit);
   }
 }
